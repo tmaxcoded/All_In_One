@@ -37,7 +37,8 @@ namespace HealthyAPI
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IMoneyPlacement, MoneyPlacementService>();
             services.AddScoped<IMoneyTaker,MoneyTakerService>();
-
+            services.AddTransient<IUnitOfWork, UnitOfWorkService>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
         }
 
@@ -54,7 +55,7 @@ namespace HealthyAPI
             app.UseRouting();
 
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
